@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE-Edge">
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<title>Mi Pagina Web</title>
+	</head>
+	<body>
+		
+		<form method="POST" action="" >
+		    <div>
+		    	<div>
+		    		<label style="margin: 5px;">Region:</label>
+		    		<label id="idRegion" style="margin-right:20px;"></label>
+		    		<label style="margin: 5px;">IP:</label>
+		    		<label id="idIp" style="margin-right: 20px;"></label>
+		    	</div>
+		    	<div style="margin: 10px;">
+			    	<button type="button" id="btnMandarCall" name="btnMandarCall" onclick="CallApiRest()">
+						<i >Consumir Servicio php</i>
+			        </button>	        
+			        <input type="hidden" name="nombreArchivo" value="Respuesta1">
+			        <!-- <button type="submit"><i>Exportar JSON</i></button> -->
+		        </div> 
+		        <div>                                 
+		            <table class="table">
+		            	<thead>
+		            		<tr>
+		            			<td class="encabezado">Tipo</td>
+		            			<td class="encabezado">Color</td>
+		            			<td class="encabezado">Tama&#241;o</td>
+		            		</tr>
+		            	</thead>
+		            	<tbody id="filaRespuesta">
+		            		
+		            	</tbody>
+		            </table>
+		        </div>
+		    </div>
+		</form>
+	<input type="hidden" id="ruta" name="num_mesero" value="<?php echo $Server; ?>">
+	</body>
+	<style>
+		.table{
+			padding: 8px;
+			border: 1px solid #ddd;        
+			border-collapse: collapse;
+			font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+			font-size: 14px;
+
+		}
+		.encabezado {  		
+		    padding: 8px;
+		    margin-bottom: 1rem;          
+		    border-radius: 1px;        
+		    background-color: #3DACB6;
+			color: #FFFFFF;
+		}
+		.filas{
+			border: 1px solid #f4f4f4;
+			padding: 8px;
+		}
+	</style>
+</html>
+<script>
+
+	CallApiIp();
+
+	function CallApiIp(){
+
+		rRegion = "";
+		rIp = "";
+		var requestOptions = {
+		  method: 'GET',
+		  redirect: 'follow'
+		};
+
+		fetch("https://ipapi.co/json", requestOptions)
+		  .then(response => response.json())
+		  .then(result => {
+		  	rRegion = result.city + " " + result.region + ", " + result.country_name + ".";
+		  	rIp = result.ip;
+		  	document.querySelector("#idRegion").innerHTML = rRegion;
+		  	document.querySelector("#idIp").innerHTML = rIp;
+		  })
+		  .catch(error => console.log('error', error));
+	}
+
+	function CallApiRest()
+	{
+		FilasRespuesta = "";
+
+		FilasRespuesta 	+= 	"<tr>" +
+		        				"<td class = 'filas'>avion</td>" +
+		            			"<td class = 'filas'>grande</td>" +
+		            			"<td class = 'filas'>verde</td>" +
+		            		"</tr>";
+	    document.querySelector("#filaRespuesta").innerHTML = FilasRespuesta;
+
+	}
+</script> 
