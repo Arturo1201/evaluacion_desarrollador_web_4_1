@@ -4,6 +4,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE-Edge">
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Mi Pagina Web</title>
+		<script src="./js/index.js"></script>
 	</head>
 	<body>
 		
@@ -62,40 +63,3 @@
 		}
 	</style>
 </html>
-<script>
-
-	CallApiIp();
-
-	function CallApiIp(){
-
-		rRegion = "";
-		rIp = "";
-		var requestOptions = {
-		  method: 'GET',
-		  redirect: 'follow'
-		};
-
-		fetch("https://ipapi.co/json", requestOptions)
-		  .then(response => response.json())
-		  .then(result => {
-		  	rRegion = result.city + " " + result.region + ", " + result.country_name + ".";
-		  	rIp = result.ip;
-		  	document.querySelector("#idRegion").innerHTML = rRegion;
-		  	document.querySelector("#idIp").innerHTML = rIp;
-		  })
-		  .catch(error => console.log('error', error));
-	}
-
-	function CallApiRest()
-	{
-		FilasRespuesta = "";
-
-		FilasRespuesta 	+= 	"<tr>" +
-		        				"<td class = 'filas'>avion</td>" +
-		            			"<td class = 'filas'>grande</td>" +
-		            			"<td class = 'filas'>verde</td>" +
-		            		"</tr>";
-	    document.querySelector("#filaRespuesta").innerHTML = FilasRespuesta;
-
-	}
-</script> 
